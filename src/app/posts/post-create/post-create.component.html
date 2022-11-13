@@ -1,4 +1,4 @@
-<h2>This is the post create component</h2>
+<app-header></app-header>
 <!-- local reference -->
 <!-- <textarea [value]="newPost" name="" id="" cols="40" rows="3" #postInput></textarea>
 <br>
@@ -8,10 +8,16 @@
 </p> -->
 
 <!-- two-way binding -->
+<mat-card>
+  <mat-form-field>
+    <textarea matInput cols="40" rows="3" [(ngModel)]="enteredValue"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="onAddPost2()">
+    Save post
+  </button>
+</mat-card>
+<br />
 
-<textarea cols="40" rows="3" [(ngModel)]="enteredValue"></textarea>
-<br>
-<button (click)="onAddPost2()">Save post</button>
 <p>
-  {{ newPost}}
+  {{ newPost }}
 </p>
