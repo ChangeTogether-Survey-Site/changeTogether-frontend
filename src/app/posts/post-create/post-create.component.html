@@ -1,17 +1,16 @@
 <mat-card>
-  <mat-form-field>
-    <textarea matInput cols="40" rows="3" [(ngModel)]="enteredValue"></textarea>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter post title</mat-label>
+    <input matInput type="text" name="title" id="title" [(ngModel)]="enteredTitle">
   </mat-form-field>
-  <button mat-raised-button color="accent" (click)="onAddPost2()">
+  <p>Post body:</p>
+  <mat-form-field>
+    <textarea matInput cols="40" rows="3" [(ngModel)]="enteredContent"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="onAddPost()">
     Save post
   </button>
 </mat-card>
 <br />
 
-<p>
-  {{ newPost }}
-</p>
-
 <hr>
-
-<app-survey-create></app-survey-create>
