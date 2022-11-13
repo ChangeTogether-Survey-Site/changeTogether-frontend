@@ -1,1 +1,21 @@
 <h2>Survey Create component</h2>
+<form action="/" method="get">
+  <p>
+    <label for="surveyName">Name for the survey</label
+    ><input type="text" id="surveyName" />
+  </p>
+  <p>
+    <label for="surveyDescription">Text description and instructions</label
+    ><textarea id="surveyDescription" rows="3"></textarea>
+  </p>
+  <p>
+    <label for="surveyOrg">Name of the organization</label
+    ><input type="text" id="surveyOrg" />
+  </p>
+  <p>
+    <label for="surveyNoQuestions">Number of questions</label
+    ><input type="text" id="surveyNoQuestions" />
+  </p>
+
+  <input type="submit" value="Create" (click)="onAddSurvey()"/>
+</form>

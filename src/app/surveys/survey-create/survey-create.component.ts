@@ -5,5 +5,8 @@ import { Component } from "@angular/core";
   templateUrl: './survey-create.component.html'
 })
 export class SurveyCreateComponent {
+  onAddSurvey(){
+    alert('Survey added!');
 
+  }
 }
