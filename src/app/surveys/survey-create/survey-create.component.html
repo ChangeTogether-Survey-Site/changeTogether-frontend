@@ -1,21 +1,31 @@
-<h2>Survey Create component</h2>
-<form action="/" method="get">
-  <p>
-    <label for="surveyName">Name for the survey</label
-    ><input type="text" id="surveyName" />
-  </p>
-  <p>
-    <label for="surveyDescription">Text description and instructions</label
-    ><textarea id="surveyDescription" rows="3"></textarea>
-  </p>
-  <p>
-    <label for="surveyOrg">Name of the organization</label
-    ><input type="text" id="surveyOrg" />
-  </p>
-  <p>
-    <label for="surveyNoQuestions">Number of questions</label
-    ><input type="text" id="surveyNoQuestions" />
-  </p>
+<h3>Survey Create component</h3>
 
-  <input type="submit" value="Create" (click)="onAddSurvey()"/>
-</form>
+<!-- first input -->
+<mat-form-field appearance="fill">
+  <mat-label>Survey Title</mat-label>
+  <input matInput>
+</mat-form-field>
+<!-- second input -->
+<mat-form-field appearance="fill">
+<mat-label>Organization</mat-label>
+<input matInput>
+</mat-form-field>
+<!-- third input -->
+<mat-form-field appearance="fill">
+  <mat-label>Select number of questions</mat-label>
+  <mat-select>
+    <mat-option value="one">1 question</mat-option>
+    <mat-option value="two">2 questions</mat-option>
+    <mat-option value="two">3 questions</mat-option>
+    <mat-option value="two">4 questions</mat-option>
+  </mat-select>
+</mat-form-field>
+<!-- fourth input -->
+<mat-form-field appearance="fill">
+  <mat-label>Survey Description</mat-label>
+  <textarea matInput></textarea>
+</mat-form-field>
+
+<button mat-raised-button color="accent">
+  Create Survey
+</button>
