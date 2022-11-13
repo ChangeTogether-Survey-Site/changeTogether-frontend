@@ -1,7 +1,17 @@
 <h2>This is the post create component</h2>
-<textarea name="" id="" cols="30" rows="3"></textarea>
+<!-- local reference -->
+<!-- <textarea [value]="newPost" name="" id="" cols="40" rows="3" #postInput></textarea>
 <br>
-<button (click)="onAddPost()">Save post</button>
+<button (click)="onAddPost(postInput)">Save post</button>
 <p>
+  {{ newPost}}
+</p> -->
 
+<!-- two-way binding -->
+
+<textarea cols="40" rows="3" [(ngModel)]="enteredValue"></textarea>
+<br>
+<button (click)="onAddPost2()">Save post</button>
+<p>
+  {{ newPost}}
 </p>
