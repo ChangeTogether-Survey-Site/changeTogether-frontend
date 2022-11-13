@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SurveyCreateComponent } from './surveys/survey-create/survey-create.component';
-import { PostCreateComponent } from './posts/post-create/post-create.component'
+import { PostCreateComponent } from './posts/post-create/post-create.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PostCreateComponent } from './posts/post-create/post-create.component'
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
