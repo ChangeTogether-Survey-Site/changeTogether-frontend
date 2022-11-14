@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 // model
 import { Post } from  './posts/post.model';
+import { Survey } from './surveys/survey.model'
 
 @Component({
   selector: 'app-root',
