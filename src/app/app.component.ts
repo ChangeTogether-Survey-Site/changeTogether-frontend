@@ -11,8 +11,12 @@ import { Survey } from './surveys/survey.model'
 })
 export class AppComponent {
   storedPosts: Post[] = [];
+  storedSurveys: Survey[] = [];
 
   onPostAdded(post){
     this.storedPosts.push(post);
+  }
+  onSurveyAdded(survey){
+    this.storedSurveys.push(survey);
   }
 }

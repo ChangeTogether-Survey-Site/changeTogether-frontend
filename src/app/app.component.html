@@ -3,7 +3,7 @@
 <app-post-create (postCreated)="onPostAdded($event)"></app-post-create>
 <app-post-list [posts]="storedPosts"></app-post-list>
 <hr>
-<app-survey-create></app-survey-create>
-<app-survey-list></app-survey-list>
+<app-survey-create (surveyCreated)="onSurveyAdded($event)"></app-survey-create>
+<app-survey-list [surveys]="storedSurveys"></app-survey-list>
 
 </main>
