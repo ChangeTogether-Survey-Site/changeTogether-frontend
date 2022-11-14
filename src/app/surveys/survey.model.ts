@@ -2,7 +2,7 @@ export interface Survey {
   surveyName: string;
   organization: string;
   description: string;
-  questions: [];
+  questions: string;
 }
 
 // title change to surveyName

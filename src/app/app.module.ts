@@ -15,6 +15,7 @@ import { SurveyCreateComponent } from './surveys/survey-create/survey-create.com
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     SurveyCreateComponent,
     PostCreateComponent,
     HeaderComponent,
-    PostListComponent
+    PostListComponent,
+    SurveyListComponent
   ],
   imports: [
     BrowserModule,

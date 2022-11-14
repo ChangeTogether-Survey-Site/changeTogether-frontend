@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { Survey } from "../survey.model";
 
 @Component({
   selector: 'app-survey-create',
@@ -6,8 +7,22 @@ import { Component } from "@angular/core";
   styleUrls: ['./survey-create.component.css']
 })
 export class SurveyCreateComponent {
-  onAddSurvey(){
-    alert('Survey added!');
 
-  }
+  // post data
+  enteredSurveyName = '';
+  enteredOrganization = '';
+  enteredDescription = '';
+  enteredQuestions = '';
+  // event
+  @Output() surveyCreated = new EventEmitter<Survey>();
+
+  onAddSurvey() {
+    const survey: Survey = {
+      surveyName: this.enteredSurveyName,
+      organization: this.enteredOrganization,
+      description: this.enteredDescription,
+      questions: this.enteredQuestions
+    };
+    this.surveyCreated.emit(survey);
+}
 }

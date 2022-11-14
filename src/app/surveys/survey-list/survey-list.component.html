@@ -1,0 +1,11 @@
+<mat-accordion *ngIf="surveys.length > 0">
+  <mat-expansion-panel *ngFor="let survey of surveys">
+    <mat-expansion-panel-header>
+      <mat-card-title>{{ survey.title }} </mat-card-title>
+    </mat-expansion-panel-header>
+    <mat-card-content>{{ survey.content }}</mat-card-content>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="surveys.length <= 0">
+  There are no surveys to show (create one).
+</p>
