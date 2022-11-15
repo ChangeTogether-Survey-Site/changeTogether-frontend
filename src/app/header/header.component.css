@@ -1,0 +1,17 @@
+.mat-toolbar{
+  background-color: cornflowerblue;
+  color: white;
+}.mat-button{
+   color: white;
+}.spacer{
+  flex: 1 1 auto;
+}
+.active-page {
+  text-shadow: 1px 1px 5px #fff;
+}
+
+#nav-logo img {
+  height: 64px;
+  display: block;
+  margin: auto;
+}
