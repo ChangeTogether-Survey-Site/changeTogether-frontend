@@ -24,5 +24,6 @@ export class SurveyCreateComponent {
     }
     console.log(form.value);
     this.surveysService.addSurvey(form.value.surveyName, form.value.organization, form.value.description, form.value.numberOfQuestions);
+    form.resetForm();
   }
 }
