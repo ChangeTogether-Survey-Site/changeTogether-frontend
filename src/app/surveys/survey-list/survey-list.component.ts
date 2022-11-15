@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 import { Survey } from "../survey.model";
+import { SurveysService } from "../surveys.service";
 
 @Component({
   selector: 'app-survey-list',
@@ -9,6 +10,8 @@ import { Survey } from "../survey.model";
 })
 export class SurveyListComponent {
   @Input() surveys: Survey[] = [];
+
+  constructor(public surveysService: SurveysService){}
 
   // posts = [
   //   {title: 'First Post', content: 'This is the first post\'s content'},
