@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 
 import { Survey } from "../survey.model";
 import { SurveysService } from "../surveys.service";
@@ -8,12 +9,22 @@ import { SurveysService } from "../surveys.service";
   templateUrl: './survey-list.component.html',
   styleUrls: ['./survey-list.component.css']
 })
-export class SurveyListComponent implements OnInit{
+export class SurveyListComponent implements OnInit, OnDestroy{
   surveys: Survey[] = [];
+  private surveysSub: Subscription;
 
   constructor(public surveysService: SurveysService){}
   ngOnInit(): void {
     this.surveys = this.surveysService.getSurveys();
+    this.surveysSub = this.surveysService.getSurveyUpdateListener().subscribe((surveys: Survey[])=>{
+      this.surveys = surveys;
+    });
+  }
+
+  // unsubscribe from the observable if the component is destroyed
+  // prevents memory leaks
+  ngOnDestroy(): void {
+    this.surveysSub.unsubscribe();
   }
 
   // posts = [
