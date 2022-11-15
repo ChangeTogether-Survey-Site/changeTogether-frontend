@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
 
 // components imports
 import { AppComponent } from './app.component';
@@ -35,7 +36,8 @@ import { SurveyListComponent } from './surveys/survey-list/survey-list.component
     MatButtonModule,
     MatToolbarModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

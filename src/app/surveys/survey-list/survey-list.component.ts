@@ -13,9 +13,9 @@ export class SurveyListComponent implements OnInit, OnDestroy{
   surveys: Survey[] = [];
   private surveysSub: Subscription;
 
-  constructor(public surveysService: SurveysService){}
+  constructor(private surveysService: SurveysService){}
   ngOnInit(): void {
-    this.surveys = this.surveysService.getSurveys();
+    this.surveysService.getSurveys();
     this.surveysSub = this.surveysService.getSurveyUpdateListener().subscribe((surveys: Survey[])=>{
       this.surveys = surveys;
     });

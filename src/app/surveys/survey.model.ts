@@ -1,4 +1,5 @@
 export interface Survey {
+  id: string;
   surveyName: string;
   organization: string;
   description: string;

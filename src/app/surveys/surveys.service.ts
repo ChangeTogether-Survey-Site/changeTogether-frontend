@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -8,8 +9,21 @@ export class SurveysService {
   private surveys: Survey[] = [];
   private surveysUpdated = new Subject<Survey[]>();
 
+  // inject the http module
+constructor(private http: HttpClient) {}
+
   getSurveys(){
-    return [...this.surveys];
+    // request to the api (the type is the same as the output from server)
+    this.http.get<{message: string, surveys: Survey[]}>('http://localhost:5000/api/surveys')
+    .subscribe( (surveysData)=>{
+      // get the response
+      this.surveys = surveysData.surveys;
+      // send the response to the listener
+      this.surveysUpdated.next([...this.surveys]);
+    } );
+
+    // for mockup request to an object
+    // return [...this.surveys];
   }
 
   getSurveyUpdateListener() {
@@ -18,7 +32,7 @@ export class SurveysService {
 
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
-    const survey: Survey = {surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
+    const survey: Survey = {id: null, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
     this.surveys.push(survey);
     this.surveysUpdated.next([...this.surveys]);
   }
