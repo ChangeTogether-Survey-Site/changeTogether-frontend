@@ -6,4 +6,5 @@
 
 mat-form-field.mat-form-field {
   width: 40%;
+  margin: 0 0.5rem 0 0;
 }

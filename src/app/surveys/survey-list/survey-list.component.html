@@ -1,9 +1,27 @@
 <mat-accordion *ngIf="surveys.length > 0">
   <mat-expansion-panel *ngFor="let survey of surveys">
+
     <mat-expansion-panel-header>
-      <mat-card-title>{{ survey.title }} </mat-card-title>
+      <mat-panel-title>
+        {{ survey.surveyName }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ survey.description }}
+      </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-card-content>{{ survey.content }}</mat-card-content>
+
+    <mat-card-content>
+      <ul>
+        <li>
+          Name of the organization: {{ survey.organization }}
+        </li>
+        <li>
+          Number of questions: {{ survey.questions }}
+          <!-- this displays for now the number of questions, it has to
+          display a count of the array of questions in the future -->
+        </li>
+      </ul>
+    </mat-card-content>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="surveys.length <= 0">

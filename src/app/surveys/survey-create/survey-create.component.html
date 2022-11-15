@@ -1,31 +1,68 @@
 <h3>Create a new Survey</h3>
+<mat-card>
+  <form (submit)="onAddSurvey(surveyForm)" #surveyForm="ngForm">
+    <!-- first input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Survey Name</mat-label>
+      <input
+        matInput
+        type="text"
+        name="surveyName"
+        id="surveyName"
+        ngModel
+        required
+        #surveyName="ngModel"
+      />
+      <mat-error *ngIf="surveyName.invalid">Please add a title</mat-error>
+    </mat-form-field>
+    <!-- second input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Organization</mat-label>
+      <input
+        matInput
+        type="text"
+        name="organization"
+        id="organization"
+        ngModel
+        required
+        #organization="ngModel"
+      />
+      <mat-error *ngIf="organization.invalid"
+        >Please add an organization name</mat-error
+      >
+    </mat-form-field>
+    <!-- third input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Select number of questions</mat-label>
+      <mat-select
+        name="numberOfQuestions"
+        id="numberOfQuestions"
+        required
+        ngModel
+        #questions="ngModel"
+      >
+        <mat-option value="1">1 question</mat-option>
+        <mat-option value="2">2 questions</mat-option>
+        <mat-option value="3">3 questions</mat-option>
+        <mat-option value="4">4 questions</mat-option>
+      </mat-select>
+      <mat-error *ngIf="questions.invalid"
+      >Please select a number of questions</mat-error
+    >
+    </mat-form-field>
+    <!-- fourth input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Survey Description</mat-label>
+      <textarea
+        matInput
+        name="description"
+        id="description"
+        ngModel
+        required
+        #content="ngModel"
+      ></textarea>
+    </mat-form-field>
 
-<!-- first input -->
-<mat-form-field appearance="fill">
-  <mat-label>Survey Title</mat-label>
-  <input matInput>
-</mat-form-field>
-<!-- second input -->
-<mat-form-field appearance="fill">
-<mat-label>Organization</mat-label>
-<input matInput>
-</mat-form-field>
-<!-- third input -->
-<mat-form-field appearance="fill">
-  <mat-label>Select number of questions</mat-label>
-  <mat-select>
-    <mat-option value="one">1 question</mat-option>
-    <mat-option value="two">2 questions</mat-option>
-    <mat-option value="two">3 questions</mat-option>
-    <mat-option value="two">4 questions</mat-option>
-  </mat-select>
-</mat-form-field>
-<!-- fourth input -->
-<mat-form-field appearance="fill">
-  <mat-label>Survey Description</mat-label>
-  <textarea matInput></textarea>
-</mat-form-field>
-
-<button mat-raised-button color="accent">
-  Create Survey
-</button>
+    <button mat-raised-button color="accent">Create Survey</button>
+  </form>
+</mat-card>

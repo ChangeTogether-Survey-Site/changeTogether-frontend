@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Survey } from "../survey.model";
 import { SurveysService } from "../surveys.service";
@@ -8,10 +8,13 @@ import { SurveysService } from "../surveys.service";
   templateUrl: './survey-list.component.html',
   styleUrls: ['./survey-list.component.css']
 })
-export class SurveyListComponent {
-  @Input() surveys: Survey[] = [];
+export class SurveyListComponent implements OnInit{
+  surveys: Survey[] = [];
 
   constructor(public surveysService: SurveysService){}
+  ngOnInit(): void {
+    this.surveys = this.surveysService.getSurveys();
+  }
 
   // posts = [
   //   {title: 'First Post', content: 'This is the first post\'s content'},
