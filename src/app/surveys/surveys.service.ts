@@ -53,10 +53,13 @@ constructor(private http: HttpClient) {}
       });
   }
 
-  deletePost(postId: string){
-    this.http.delete("http://localhost:5000/api/surveys/" + postId)
+  deleteSurvey(surveyId: string){
+    this.http.delete("http://localhost:5000/api/surveys/" + surveyId)
     .subscribe( () => {
       console.log('Deleted!');
+      const updatedSurveys = this.surveys.filter(survey => survey.id !== surveyId);
+      this.surveys = updatedSurveys;
+      this.surveysUpdated.next([...this.surveys]);
     });
   }
 }

@@ -28,7 +28,7 @@ export class SurveyListComponent implements OnInit, OnDestroy{
   }
 
   onDelete(surveyId: string){
-    this.surveysService.deletePost(surveyId);
+    this.surveysService.deleteSurvey(surveyId);
   }
 
   // posts = [
