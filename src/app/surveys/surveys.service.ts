@@ -15,7 +15,7 @@ constructor(private http: HttpClient) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
-    this.http.get<{message: string, surveys: any}>('http://localhost:3500/api/surveys')
+    this.http.get<{message: string, surveys: any}>('https://backend-changetogether.herokuapp.com/api/surveys')
     .pipe(map( (surveyData) => {
       return surveyData.surveys.map( survey => {
         return {
