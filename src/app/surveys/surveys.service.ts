@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Survey } from './survey.model';
 
@@ -14,10 +15,21 @@ constructor(private http: HttpClient) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
-    this.http.get<{message: string, surveys: Survey[]}>('http://localhost:5000/api/surveys')
-    .subscribe( (surveysData)=>{
+    this.http.get<{message: string, surveys: any}>('http://localhost:5000/api/surveys')
+    .pipe(map( (surveyData) => {
+      return surveyData.surveys.map( survey => {
+        return {
+          surveyName: survey.surveyName,
+          organization: survey.organization,
+          description: survey.description,
+          questions: survey.questions,
+          id: survey._id
+        }; // using js map inside map function to change _id to id
+      });
+    } ))
+    .subscribe( transformedSurveys=>{
       // get the response
-      this.surveys = surveysData.surveys;
+      this.surveys = transformedSurveys;
       // send the response to the listener
       this.surveysUpdated.next([...this.surveys]);
     } );
