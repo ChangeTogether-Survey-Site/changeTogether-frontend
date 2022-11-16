@@ -15,7 +15,7 @@ constructor(private http: HttpClient) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
-    this.http.get<{message: string, surveys: any}>('http://localhost:5000/api/surveys')
+    this.http.get<{message: string, surveys: any}>('http://localhost:3500/api/surveys')
     .pipe(map( (surveyData) => {
       return surveyData.surveys.map( survey => {
         return {
@@ -45,7 +45,7 @@ constructor(private http: HttpClient) {}
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
     const survey: Survey = {id: null, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
-    this.http.post<{message: string}>('http://localhost:5000/api/surveys', survey)
+    this.http.post<{message: string}>('http://localhost:3500/api/surveys', survey)
       .subscribe( (responseData)=>{
         console.log(responseData.message)
         this.surveys.push(survey);
@@ -54,7 +54,7 @@ constructor(private http: HttpClient) {}
   }
 
   deleteSurvey(surveyId: string){
-    this.http.delete("http://localhost:5000/api/surveys/" + surveyId)
+    this.http.delete("http://localhost:3500/api/surveys/" + surveyId)
     .subscribe( () => {
       console.log('Deleted!');
       const updatedSurveys = this.surveys.filter(survey => survey.id !== surveyId);
