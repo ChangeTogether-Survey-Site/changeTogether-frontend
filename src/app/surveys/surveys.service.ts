@@ -33,8 +33,13 @@ constructor(private http: HttpClient) {}
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
     const survey: Survey = {id: null, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
-    this.surveys.push(survey);
-    this.surveysUpdated.next([...this.surveys]);
+    this.http.post<{message: string}>('http://localhost:5000/api/surveys', survey)
+      .subscribe( (responseData)=>{
+        console.log(responseData.message)
+        this.surveys.push(survey);
+        this.surveysUpdated.next([...this.surveys]);
+      });
+
   }
 
 }
