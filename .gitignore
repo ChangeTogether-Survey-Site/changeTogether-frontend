@@ -5,12 +5,18 @@
 /tmp
 /out-tsc
 /bazel-out
+dist/
+tmp/
+out-tsc/
+bazel-out/
+
 
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
 test-backend/node_modules
+.history/*
 
 # IDEs and editors
 .idea/
