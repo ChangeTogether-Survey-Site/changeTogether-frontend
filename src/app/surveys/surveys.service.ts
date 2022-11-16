@@ -51,9 +51,16 @@ constructor(private http: HttpClient) {}
         this.surveys.push(survey);
         this.surveysUpdated.next([...this.surveys]);
       });
-
   }
 
+  deletePost(postId: string){
+    this.http.delete("http://localhost:5000/api/surveys/" + postId)
+    .subscribe( () => {
+      console.log('Deleted!');
+    });
+  }
 }
+
+
 
 // task: implement service for surveys and drop 2way binding
