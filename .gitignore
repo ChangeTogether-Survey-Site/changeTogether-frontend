@@ -16,7 +16,7 @@ bazel-out/
 npm-debug.log
 yarn-error.log
 test-backend/node_modules
-.history/*
+test-backend/.history
 
 # IDEs and editors
 .idea/
