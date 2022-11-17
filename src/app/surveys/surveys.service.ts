@@ -15,7 +15,7 @@ constructor(private http: HttpClient) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
-    this.http.get<{message: string, surveys: any}>('https://backend-changetogether.herokuapp.com/api/surveys')
+    this.http.get<{message: string, surveys: any}>('http://localhost:3500/api/surveys')
     .pipe(map( (surveyData) => {
       return surveyData.surveys.map( survey => {
         return {
@@ -44,12 +44,16 @@ constructor(private http: HttpClient) {}
 
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
-    const survey: Survey = {id: null, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
-    this.http.post<{message: string}>('http://localhost:3500/api/surveys', survey)
+    const survey: Survey = {id: null!, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
+    this.http
+    .post<{ message: string, surveyId: string }>('http://localhost:3500/api/surveys', survey)
       .subscribe( (responseData)=>{
-        console.log(responseData.message)
+        const responseId = responseData.surveyId; // get the id from the response
+        survey.id = responseId;
+        console.log(`message: ${responseData.message}`);
         this.surveys.push(survey);
         this.surveysUpdated.next([...this.surveys]);
+        console.log(`new post id: ${survey.id}`)
       });
   }
 
