@@ -9,7 +9,7 @@
         type="text"
         name="surveyName"
         id="surveyName"
-        ngModel
+        [ngModel]="survey?.surveyName"
         required
         #surveyName="ngModel"
       />
@@ -23,7 +23,7 @@
         type="text"
         name="organization"
         id="organization"
-        ngModel
+        [ngModel]="survey?.organization"
         required
         #organization="ngModel"
       />
@@ -38,7 +38,7 @@
         name="numberOfQuestions"
         id="numberOfQuestions"
         required
-        ngModel
+        [ngModel]="survey?.questions"
         #questions="ngModel"
       >
         <mat-option value="1">1 question</mat-option>
@@ -57,7 +57,7 @@
         matInput
         name="description"
         id="description"
-        ngModel
+        [ngModel]="survey?.description"
         required
         #content="ngModel"
       ></textarea>

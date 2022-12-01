@@ -42,6 +42,10 @@ constructor(private http: HttpClient) {}
     return this.surveysUpdated.asObservable();
   }
 
+  getSurvey(id: string){
+    return {...this.surveys.find(survey => survey.id === id)}
+  }
+
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
     const survey: Survey = {id: null!, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};

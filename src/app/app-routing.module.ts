@@ -7,6 +7,7 @@ import { SurveyCreateComponent } from "./surveys/survey-create/survey-create.com
 const routes: Routes = [
   { path: "", component: SurveyListComponent },
   { path: "create", component: SurveyCreateComponent },
+  { path: "edit/:surveyId", component: SurveyCreateComponent },
 ]
 
 @NgModule({

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SurveysService } from '../surveys.service';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Survey } from '../survey.model';
 
 
 
@@ -9,14 +12,31 @@ import { NgForm } from '@angular/forms';
   templateUrl: './survey-create.component.html',
   styleUrls: ['./survey-create.component.css'],
 })
-export class SurveyCreateComponent {
+export class SurveyCreateComponent implements OnInit {
   // post data
   enteredSurveyName = '';
   enteredOrganization = '';
   enteredDescription = '';
   enteredQuestions = '';
+  survey: Survey; // stores the survey passed from service getPost
+  private mode = 'create'; // default
+  private surveyId: string;
 
-  constructor(public surveysService: SurveysService) {}
+
+  constructor(public surveysService: SurveysService, public route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe( (paramMap: ParamMap) => {
+      if ( paramMap.has('surveyId') ){
+        this.mode = 'edit';
+        this.surveyId = paramMap.get('surveyId');
+        this.survey = this.surveysService.getSurvey(this.surveyId);
+      } else {
+        this.mode = 'create';
+        this.surveyId = null;
+      }
+    });
+  }
 
   onAddSurvey(form: NgForm) {
     if (form.invalid) {
