@@ -23,11 +23,14 @@ export class SurveyCreateComponent implements OnInit {
   private surveyId: string;
 
 
-  constructor(public surveysService: SurveysService, public route: ActivatedRoute) {}
+  constructor(
+    public surveysService: SurveysService,
+    public route: ActivatedRoute) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.paramMap.subscribe( (paramMap: ParamMap) => {
       if ( paramMap.has('surveyId') ){
+        console.log(`edit mode : ${paramMap.get('surveyId')}`);
         this.mode = 'edit';
         this.surveyId = paramMap.get('surveyId');
         this.survey = this.surveysService.getSurvey(this.surveyId);

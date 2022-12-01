@@ -43,7 +43,8 @@ constructor(private http: HttpClient) {}
   }
 
   getSurvey(id: string){
-    return {...this.surveys.find(survey => survey.id === id)}
+    console.log(`getSurvey id: ${id}`);
+    return {...this.surveys.find(s => s.id === id)}
   }
 
   // numberOfQuestions: this must be changed to an array of the questions later
