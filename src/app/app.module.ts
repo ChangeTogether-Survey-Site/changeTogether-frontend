@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AppRoutingModule } from './app-routing.module';
     PostCreateComponent,
     HeaderComponent,
     PostListComponent,
-    SurveyListComponent
+    SurveyListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
