@@ -19,7 +19,7 @@ export class SurveyCreateComponent implements OnInit {
   enteredDescription = '';
   enteredQuestions = '';
   survey: Survey; // stores the survey passed from service getPost
-  private mode = 'create'; // default
+  private mode: string = 'create'; // default
   private surveyId: string;
 
 
@@ -41,12 +41,27 @@ export class SurveyCreateComponent implements OnInit {
     });
   }
 
-  onAddSurvey(form: NgForm) {
+  onSaveSurvey(form: NgForm) {
     if (form.invalid) {
       return;
     }
+    if (this.mode === 'create'){
+      this.surveysService.addSurvey(
+        form.value.surveyName,
+        form.value.organization,
+        form.value.description,
+        form.value.numberOfQuestions
+        );
+    } else {
+      this.surveysService.updateSurvey(
+        this.surveyId,
+        form.value.surveyName,
+        form.value.organization,
+        form.value.description,
+        form.value.numberOfQuestions
+        );
+    }
     console.log(form.value);
-    this.surveysService.addSurvey(form.value.surveyName, form.value.organization, form.value.description, form.value.numberOfQuestions);
     form.resetForm();
   }
 }

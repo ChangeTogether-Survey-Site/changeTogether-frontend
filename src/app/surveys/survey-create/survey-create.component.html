@@ -1,6 +1,6 @@
 <h3>Create a new Survey</h3>
 <mat-card>
-  <form (submit)="onAddSurvey(surveyForm)" #surveyForm="ngForm">
+  <form (submit)="onSaveSurvey(surveyForm)" #surveyForm="ngForm">
     <!-- first input -->
     <mat-form-field appearance="fill">
       <mat-label>Survey Name</mat-label>
@@ -63,6 +63,6 @@
       ></textarea>
     </mat-form-field>
 
-    <button mat-raised-button color="accent">Create Survey</button>
+    <button mat-raised-button color="accent">Save Survey</button>
   </form>
 </mat-card>

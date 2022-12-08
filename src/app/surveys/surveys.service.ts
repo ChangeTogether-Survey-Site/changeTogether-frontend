@@ -62,6 +62,14 @@ constructor(private http: HttpClient) {}
       });
   }
 
+  updateSurvey(id: string, surveyName: string, organization: string,
+    description: string, numberOfQuestions: string){
+      const survey: Survey = { id: id, surveyName: surveyName, organization: organization,
+        description: description, questions: numberOfQuestions };
+      this.http.put("http://localhost:3500/api/surveys/" + id, survey)
+      .subscribe(response => console.log(response));
+    }
+
   deleteSurvey(surveyId: string){
     this.http.delete("http://localhost:3500/api/surveys/" + surveyId)
     .subscribe( () => {
