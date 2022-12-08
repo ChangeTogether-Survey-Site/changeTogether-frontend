@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +12,7 @@ export class SurveysService {
   private surveysUpdated = new Subject<Survey[]>();
 
   // inject the http module
-constructor(private http: HttpClient) {}
+constructor(private http: HttpClient, private router: Router) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
@@ -44,8 +45,12 @@ constructor(private http: HttpClient) {}
 
   getSurvey(id: string){
     console.log(`getSurvey id: ${id}`);
-    return {...this.surveys.find(s => s.id === id)}
+    return this.http.get<{_id: string, surveyName: string, organization: string, description: string, questions: string}>
+      ('http://localhost:3500/api/surveys/' + id);
+    //return {...this.surveys.find(s => s.id === id)}
   }
+
+  //
 
   // numberOfQuestions: this must be changed to an array of the questions later
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
@@ -55,10 +60,10 @@ constructor(private http: HttpClient) {}
       .subscribe( (responseData)=>{
         const responseId = responseData.surveyId; // get the id from the response
         survey.id = responseId;
-        console.log(`message: ${responseData.message}`);
+        console.log(`created a survey`);
         this.surveys.push(survey);
         this.surveysUpdated.next([...this.surveys]);
-        console.log(`new post id: ${survey.id}`)
+        this.router.navigate(["/"])
       });
   }
 
@@ -67,7 +72,14 @@ constructor(private http: HttpClient) {}
       const survey: Survey = { id: id, surveyName: surveyName, organization: organization,
         description: description, questions: numberOfQuestions };
       this.http.put("http://localhost:3500/api/surveys/" + id, survey)
-      .subscribe(response => console.log(response));
+      .subscribe(response => {
+        const updatedSurveys = [...this.surveys];
+        const oldSurveyIndex = updatedSurveys.findIndex(s => s.id === survey.id);
+        updatedSurveys[oldSurveyIndex] = survey;
+        this.surveys = updatedSurveys;
+        this.surveysUpdated.next([...this.surveys]);
+        this.router.navigate(["/"])
+      });
     }
 
   deleteSurvey(surveyId: string){

@@ -1,6 +1,7 @@
 <h3>Create a new Survey</h3>
 <mat-card>
-  <form (submit)="onSaveSurvey(surveyForm)" #surveyForm="ngForm">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSaveSurvey(surveyForm)" #surveyForm="ngForm" *ngIf="!isLoading">
     <!-- first input -->
     <mat-form-field appearance="fill">
       <mat-label>Survey Name</mat-label>

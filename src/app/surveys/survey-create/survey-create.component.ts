@@ -21,6 +21,7 @@ export class SurveyCreateComponent implements OnInit {
   survey: Survey; // stores the survey passed from service getPost
   private mode: string = 'create'; // default
   private surveyId: string;
+  isLoading: boolean = false;
 
 
   constructor(
@@ -33,7 +34,17 @@ export class SurveyCreateComponent implements OnInit {
         console.log(`edit mode : ${paramMap.get('surveyId')}`);
         this.mode = 'edit';
         this.surveyId = paramMap.get('surveyId');
-        this.survey = this.surveysService.getSurvey(this.surveyId);
+        this.isLoading = true;
+         this.surveysService.getSurvey(this.surveyId).subscribe(surveyData => {
+          this.isLoading = false;
+          this.survey = {
+            id: surveyData._id,
+            surveyName: surveyData.surveyName,
+            organization: surveyData.organization,
+            description: surveyData.description,
+            questions: surveyData.questions
+          }
+         });
       } else {
         this.mode = 'create';
         this.surveyId = null;
@@ -45,6 +56,7 @@ export class SurveyCreateComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === 'create'){
       this.surveysService.addSurvey(
         form.value.surveyName,

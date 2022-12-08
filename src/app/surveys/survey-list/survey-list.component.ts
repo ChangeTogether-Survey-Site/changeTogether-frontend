@@ -12,11 +12,14 @@ import { SurveysService } from "../surveys.service";
 export class SurveyListComponent implements OnInit, OnDestroy{
   surveys: Survey[] = [];
   private surveysSub: Subscription;
+  isLoading: boolean = false;
 
   constructor(private surveysService: SurveysService){}
   ngOnInit(): void {
+    this.isLoading = true;
     this.surveysService.getSurveys();
     this.surveysSub = this.surveysService.getSurveyUpdateListener().subscribe((surveys: Survey[])=>{
+      this.isLoading = false;
       this.surveys = surveys;
     });
   }
