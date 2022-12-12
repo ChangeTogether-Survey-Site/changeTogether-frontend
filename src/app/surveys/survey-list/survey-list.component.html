@@ -22,7 +22,7 @@
           display a count of the array of questions in the future -->
         </li>
       </ul>
-      <mat-action-row>
+      <mat-action-row *ngIf="userIsAuthenticated">
         <a mat-button color="primary" [routerLink]="['/edit', survey.id]">Edit</a>
         <button mat-button color="warn" (click)="onDelete(survey.id)">Delete</button>
       </mat-action-row>

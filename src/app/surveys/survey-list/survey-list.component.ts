@@ -1,26 +1,35 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
-import { Survey } from "../survey.model";
-import { SurveysService } from "../surveys.service";
+import { Survey } from '../survey.model';
+import { SurveysService } from '../surveys.service';
 
 @Component({
   selector: 'app-survey-list',
   templateUrl: './survey-list.component.html',
-  styleUrls: ['./survey-list.component.css']
+  styleUrls: ['./survey-list.component.css'],
 })
-export class SurveyListComponent implements OnInit, OnDestroy{
+export class SurveyListComponent implements OnInit, OnDestroy {
   surveys: Survey[] = [];
   private surveysSub: Subscription;
   isLoading: boolean = false;
+  private authStatusSub: Subscription;
+  public userIsAuthenticated = false;
 
-  constructor(private surveysService: SurveysService){}
+  constructor(private surveysService: SurveysService, private authService: AuthService) {}
   ngOnInit(): void {
     this.isLoading = true;
     this.surveysService.getSurveys();
-    this.surveysSub = this.surveysService.getSurveyUpdateListener().subscribe((surveys: Survey[])=>{
-      this.isLoading = false;
-      this.surveys = surveys;
+    this.surveysSub = this.surveysService
+      .getSurveyUpdateListener()
+      .subscribe((surveys: Survey[]) => {
+        this.isLoading = false;
+        this.surveys = surveys;
+      });
+    this.userIsAuthenticated = this.authService.getIsAuthenticated();
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
     });
   }
 
@@ -28,9 +37,10 @@ export class SurveyListComponent implements OnInit, OnDestroy{
   // prevents memory leaks
   ngOnDestroy(): void {
     this.surveysSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
-  onDelete(surveyId: string){
+  onDelete(surveyId: string) {
     this.surveysService.deleteSurvey(surveyId);
   }
 

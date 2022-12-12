@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" >
+<mat-toolbar color="primary">
   <span id="nav-logo">
     <img
       src="../../assets/images/official-logo-web.png"
@@ -6,12 +6,64 @@
     />
   </span>
   <div class="spacer"></div>
-  <a mat-button id="nav-home" routerLink="/" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active-page">Home</a>
-  <a mat-button id="nav-login" routerLink="/login" routerLinkActive="active-page" [routerLinkActiveOptions]="{exact:true}">Login</a>
-  <a mat-button id="nav-signup" routerLink="/signup" routerLinkActive="active-page" [routerLinkActiveOptions]="{exact:true}">Signup</a>
-  <a mat-button id="nav-create" routerLink="/create" routerLinkActive="active-page" [routerLinkActiveOptions]="{exact:true}">Create a Survey</a>
-  <a mat-button id="nav-about" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{exact:true}">About us</a>
-  <a mat-button id="nav-contact" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{exact:true}">Contact</a>
+  <a
+    mat-button
+    id="nav-home"
+    routerLink="/"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active-page"
+    >Home</a
+  >
+  <span *ngIf="!userIsAuthenticated">
+    <a
+      mat-button
+      id="nav-login"
+      routerLink="/login"
+      routerLinkActive="active-page"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Login</a
+    >
+    <a
+      mat-button
+      id="nav-signup"
+      routerLink="/signup"
+      routerLinkActive="active-page"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Signup</a
+    >
+  </span>
+  <span *ngIf="userIsAuthenticated">
+    <a
+      mat-button
+      id="nav-create"
+      routerLink="/create"
+      routerLinkActive="active-page"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Create a Survey</a
+    >
+  </span>
+  <span *ngIf="userIsAuthenticated">
+    <a
+      mat-button
+      id="nav-logout"
+      (click)="onLogout()"
+      >Logout</a
+    >
+  </span>
+  <a
+    mat-button
+    id="nav-about"
+    routerLinkActive="mat-accent"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >About us</a
+  >
+  <a
+    mat-button
+    id="nav-contact"
+    routerLinkActive="mat-accent"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Contact</a
+  >
 </mat-toolbar>
 <!-- Hero image, move later to Home component -->
 <div id="hero-image">
