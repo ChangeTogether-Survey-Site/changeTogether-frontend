@@ -1,3 +1,4 @@
+import { AuthService } from '../auth.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -8,13 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  constructor(public route: ActivatedRoute) {
-
-  }
+  constructor(public authService: AuthService, public route: ActivatedRoute) {}
 
   isLoading: boolean = false;
 
   onSignup(form: NgForm) {
-    console.log(form.value);
+    if (form.invalid){
+      return;
+    }
+    this.authService.createUser(form.value.email, form.value.password);
   }
 }
