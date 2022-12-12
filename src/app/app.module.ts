@@ -22,6 +22,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     SurveyListComponent,
     LoginComponent,
     SignupComponent,
+    FooterComponent,
+    ContactComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
