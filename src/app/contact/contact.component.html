@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Contact Us</h1>
+  <p>Drop us a message:</p>
+  <mat-card>
+    <form>
+      <!-- first input -->
+      <mat-form-field appearance="fill">
+        <mat-label>Full name</mat-label>
+        <input matInput type="text" name="fullName" id="fullName" required />
+      </mat-form-field>
+      <!-- second input -->
+      <mat-form-field appearance="fill">
+        <mat-label>E-Mail</mat-label>
+        <input matInput type="email" name="email" id="email" required />
+      </mat-form-field>
+    <!-- fourth input -->
+    <mat-form-field appearance="fill">
+        <mat-label>Message</mat-label>
+        <textarea
+          matInput
+          name="messageBody"
+          id="messageBody"
+          cols="100"
+          required
+        ></textarea>
+      </mat-form-field>
+
+
+    </form>
+  </mat-card>
+
+  <h2>Or...</h2>
+
+  <p>Email us at: hello(@)changetogether.ca</p>
+</div>
