@@ -5,6 +5,9 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Survey } from './survey.model';
+import { environment } from '../../environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({providedIn: 'root'})
 export class SurveysService {
@@ -16,7 +19,7 @@ constructor(private http: HttpClient, private router: Router) {}
 
   getSurveys(){
     // request to the api (the type is the same as the output from server)
-    this.http.get<{message: string, surveys: any}>('http://localhost:3500/api/surveys')
+    this.http.get<{message: string, surveys: any}>(BACKEND_URL + '/surveys')
     .pipe(map( (surveyData) => {
       return surveyData.surveys.map( survey => {
         return {
@@ -46,7 +49,7 @@ constructor(private http: HttpClient, private router: Router) {}
   getSurvey(id: string){
     console.log(`getSurvey id: ${id}`);
     return this.http.get<{_id: string, surveyName: string, organization: string, description: string, questions: string}>
-      ('http://localhost:3500/api/surveys/' + id);
+      (BACKEND_URL + '/surveys/' + id);
     //return {...this.surveys.find(s => s.id === id)}
   }
 
@@ -56,7 +59,7 @@ constructor(private http: HttpClient, private router: Router) {}
   addSurvey(surveyName: string, organization: string, description: string, numberOfQuestions: string){
     const survey: Survey = {id: null!, surveyName: surveyName, organization: organization, description: description, questions: numberOfQuestions};
     this.http
-    .post<{ message: string, surveyId: string }>('http://localhost:3500/api/surveys', survey)
+    .post<{ message: string, surveyId: string }>(BACKEND_URL + '/surveys', survey)
       .subscribe( (responseData)=>{
         const responseId = responseData.surveyId; // get the id from the response
         survey.id = responseId;
@@ -71,7 +74,7 @@ constructor(private http: HttpClient, private router: Router) {}
     description: string, numberOfQuestions: string){
       const survey: Survey = { id: id, surveyName: surveyName, organization: organization,
         description: description, questions: numberOfQuestions };
-      this.http.put("http://localhost:3500/api/surveys/" + id, survey)
+      this.http.put(BACKEND_URL + "/surveys/" + id, survey)
       .subscribe(response => {
         const updatedSurveys = [...this.surveys];
         const oldSurveyIndex = updatedSurveys.findIndex(s => s.id === survey.id);
@@ -83,7 +86,7 @@ constructor(private http: HttpClient, private router: Router) {}
     }
 
   deleteSurvey(surveyId: string){
-    this.http.delete("http://localhost:3500/api/surveys/" + surveyId)
+    this.http.delete(BACKEND_URL + "/surveys/" + surveyId)
     .subscribe( () => {
       console.log('Deleted!');
       const updatedSurveys = this.surveys.filter(survey => survey.id !== surveyId);
